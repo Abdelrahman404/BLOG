@@ -17,6 +17,11 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return mixed
      */
+
+    protected $hidden = [
+        'password', 'remember_token', 'email_verified_at'
+    ];
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -30,5 +35,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function posts(){
+
+        return $this->hasMany(Post::class);
     }
 }
